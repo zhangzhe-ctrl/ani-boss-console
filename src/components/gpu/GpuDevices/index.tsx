@@ -20,7 +20,15 @@ const columns: ListColumn<GpuDevice>[] = [
   { title: "节点 UID", dataIndex: "node.uid", width: 220, ellipsis: true },
   { title: "GPU 型号", dataIndex: "model_key", width: 180, ellipsis: true },
   { title: "供给组 ID", dataIndex: "group_id", width: 220, ellipsis: true },
-  { title: "物理显存（Bytes）", dataIndex: "physical_memory_bytes", width: 180, ellipsis: true },
+  {
+    title: "物理显存（Bytes）",
+    width: 180,
+    ellipsis: true,
+    render: (_, device) =>
+      !device.physical_memory_bytes || Number(device.physical_memory_bytes) <= 0
+        ? "未知"
+        : device.physical_memory_bytes,
+  },
   {
     title: "健康状态",
     width: 120,
